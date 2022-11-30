@@ -12,7 +12,7 @@ if ($argc < 2 || $argc > 3 || !is_numeric($argv[1])) {
     exit(255);
 }
 
-if ($argv[2] ?? '' === 'input') {
+if (($argv[2] ?? '') === 'input') {
     // Take session from .session file and get the inputs
     $session = file_get_contents(sprintf('%s/.session', __DIR__));
     if ($session === false) {
@@ -23,7 +23,7 @@ if ($argv[2] ?? '' === 'input') {
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [sprintf('Cookie: session=%s', $session)]);
     $output = curl_exec($ch);
-    file_put_contents(sprintf(__DIR__ . '/inputs/%02d.txt', $argv[1]), $output);
+    file_put_contents(sprintf(__DIR__ . '/inputs/day%02d.txt', $argv[1]), $output);
 
     // Copy the DayXX.template and replace day number
     $content = file_get_contents(sprintf('%s/src/DayXX.template', __DIR__, $argv[1]));
