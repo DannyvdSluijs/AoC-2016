@@ -42,7 +42,7 @@ class Day07
             }
         }
 
-        if (count($partsWithAbba) === 0) {
+        if ($partsWithAbba === []) {
             return false;
         }
 

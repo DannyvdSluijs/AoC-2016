@@ -17,7 +17,7 @@ class Day05
         $index = 0;
 
         while(strlen($password) < 8) {
-            $hash = md5($doorId . (string) $index);
+            $hash = md5($doorId . $index);
             if (str_starts_with($hash, '00000')) {
                 $password .= $hash[5];
             }
@@ -35,12 +35,10 @@ class Day05
         $index = 0;
 
         while(count($password) < 8) {
-            $hash = md5($doorId . (string) $index);
-            if (str_starts_with($hash, '00000')) {
-                if (!array_key_exists($hash[5], $password) && $hash[5] <= 7) {
-                    $password[$hash[5]] = $hash[6];
-                    printf("%d%%\r\n", count($password) / 8 * 100);
-                }
+            $hash = md5($doorId . $index);
+            if (str_starts_with($hash, '00000') && (!array_key_exists($hash[5], $password) && $hash[5] <= 7)) {
+                $password[$hash[5]] = $hash[6];
+                printf("%d%%\r\n", count($password) / 8 * 100);
             }
 
             $index++;
@@ -48,6 +46,6 @@ class Day05
 
         ksort($password);
         var_dump($password);
-        return implode($password);
+        return implode('', $password);
     }
 }

@@ -57,6 +57,7 @@ class Day08
             foreach ($row as $pos) {
                 echo $pos === '#' ? '#' : ' ';
             }
+
             echo PHP_EOL;
         }
 
@@ -76,6 +77,7 @@ class Day08
                             $grid->$y->$x = '#';
                         }
                     }
+
                     break;
                 case 'rotate':
                     switch ($parts[1]) {
@@ -92,6 +94,7 @@ class Day08
                             for ($row = 0; $row < $numberOfRows; $row++) {
                                 $grid->$row->$col = $new[$row];
                             }
+
                             break;
                         case 'row':
                             [, $row] = array_map(intval(...), explode('=', $parts[2]));
@@ -106,10 +109,12 @@ class Day08
                             for ($column = 0; $column < $numberOfColumns; $column++) {
                                 $grid->$row->$column = $new[$column];
                             }
+
                             break;
                         default:
                             throw new \Exception($parts[1] . ' is not supported');
                     }
+
                     break;
                 default:
                     throw new \Exception($parts[0] . ' is not supported');

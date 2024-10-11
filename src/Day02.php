@@ -32,6 +32,7 @@ class Day02
             foreach ($instruction as $step) {
                 $pos = $map[$pos][$step];
             }
+
             $code .= (string) $pos;
         }
 
@@ -64,6 +65,7 @@ class Day02
             foreach ($instruction as $step) {
                 $pos = $map[$pos][$step];
             }
+
             $code .= (string) $pos;
         }
 

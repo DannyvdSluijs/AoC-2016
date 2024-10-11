@@ -26,7 +26,7 @@ if (($argv[2] ?? '') === 'input') {
     file_put_contents(sprintf(__DIR__ . '/inputs/day%02d.txt', $argv[1]), $output);
 
     // Copy the DayXX.template and replace day number
-    $content = file_get_contents(sprintf('%s/src/DayXX.template', __DIR__, $argv[1]));
+    $content = file_get_contents(sprintf('%s/src/DayXX.template', __DIR__));
     $content = str_replace('DayXX', sprintf("Day%02d", $argv[1]), $content);
     file_put_contents(sprintf('%s/src/Day%02d.php', __DIR__, $argv[1]), $content);
 
@@ -37,10 +37,11 @@ $className = sprintf("\Dannyvdsluijs\AdventOfCode2016\Day%02d", $argv[1]);
 $object = new $className();
 $part = (int) ($argv[2] ?? 1);
 
+$time_start = microtime(true);
 $answer = match($part) {
     1 => $object->partOne(),
     2 => $object->partTwo(),
 };
+$time_end = microtime(true);
 
-
-printf("The correct answer for day %d part %d is: %s\r\n", $argv[1], $part,  $answer);
+printf("The correct answer for day %d part %d is: %s (%f sec)\r\n", $argv[1], $part, $answer, $time_end - $time_start);

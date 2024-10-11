@@ -60,6 +60,7 @@ class Day01
                 if (in_array($positionKey, $positions)) {
                     break 2;
                 }
+
                 $positions[] = $positionKey;
             }
         }

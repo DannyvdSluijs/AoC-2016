@@ -15,7 +15,7 @@ class Day04
         $content = $this->readInputAsLines();
         $content = array_map(function(string $line) {
             $matches = [];
-            preg_match('/([a-z\-]*)([0-9]*)([\[a-z\-\]]*)/', $line, $matches);
+            preg_match('/([a-z\-]*)(\d*)([\[a-z\-\]]*)/', $line, $matches);
             return [$matches[1], (int) $matches[2], str_replace(['[', ']'], '', $matches[3])];
         }, $content);
 
@@ -34,7 +34,7 @@ class Day04
         $content = $this->readInputAsLines();
         $content = array_map(function(string $line) {
             $matches = [];
-            preg_match('/([a-z\-]*)([0-9]*)([\[a-z\-\]]*)/', $line, $matches);
+            preg_match('/([a-z\-]*)(\d*)([\[a-z\-\]]*)/', $line, $matches);
             return [$matches[1], (int) $matches[2], str_replace(['[', ']'], '', $matches[3])];
         }, $content);
 
@@ -61,14 +61,15 @@ class Day04
         foreach ($charCount as $k => $v) {
             $mapped[$k] = $v * 100000 - ord($k);
         }
+
         arsort($mapped);
 
-        return implode(array_keys(array_slice($mapped, 0, 5)));
+        return implode('', array_keys(array_slice($mapped, 0, 5)));
     }
 
     private function decrypt(string $room, int $sectorId): string
     {
-        $sectorId = $sectorId % 26;
+        $sectorId %= 26;
         $chars = str_split($room);
         $limit = ord('z');
         foreach ($chars as $k => $v) {
@@ -76,6 +77,7 @@ class Day04
                 $chars[$k] = ' ';
                 continue;
             }
+
             $ord = ord($v);
             $newOrd = $ord + $sectorId;
             if ($newOrd > $limit) {
@@ -85,6 +87,6 @@ class Day04
             $chars[$k] = chr($newOrd);
         }
 
-        return implode($chars);
+        return implode('', $chars);
     }
 }

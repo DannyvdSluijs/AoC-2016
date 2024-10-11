@@ -44,7 +44,7 @@ class Day10
 
         while(true) {
             $matches = array_filter($state, fn($v, $k) => str_starts_with($k, 'bot') && count($v) === 2, ARRAY_FILTER_USE_BOTH);
-            if (count($matches) === 0) {
+            if ($matches === []) {
                 break;
             }
 
@@ -66,15 +66,18 @@ class Day10
         }
 
         $matches = array_filter($comparing, fn($v, $k) => str_starts_with($k, 'bot') && $v === [17, 61], ARRAY_FILTER_USE_BOTH);
-        if (count($matches) === 0) {
+        if ($matches === []) {
             throw new \Exception('No solution');
         }
 
         if ($part === 1) {
             return array_key_first($matches);
         }
+
         if ($part === 2) {
             return $state['output0'][0] * $state['output1'][0] * $state['output2'][0];
         }
+
+        return null;
     }
 }
